@@ -8,7 +8,7 @@ export default function Sidebar() {
         <a
           href="#"
           className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300">
-          <img src="https://via.placeholder.com/24" alt="Home" />
+          <i class="fa-solid fa-house-chimney text-xl"></i>
         </a>
         <a
           href="#"
@@ -28,10 +28,8 @@ export default function Sidebar() {
         {/* ... other navigation links */}
       </nav>
       <div className="mt-auto mb-4">
-        <a
-          href="#"
-          className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300">
-          <img src="https://via.placeholder.com/24" alt="Logout" />
+        <a href="#" className="">
+          <i class="fa-solid fa-arrow-right-from-bracket text-xl"></i>
         </a>
       </div>
     </div>

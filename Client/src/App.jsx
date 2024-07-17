@@ -22,7 +22,7 @@ function App() {
           <Route path="pass" element={<Testpass />}></Route>
 
           <Route path="addTask" element={<TaskAdd />}></Route>
-          <Route path="bashboard" element={<Dashboard />}></Route>
+          <Route path="dashboard" element={<Dashboard />}></Route>
 
           {/* for testing purpose */}
           <Route path="kanban" element={<Kanbanboard />}></Route>

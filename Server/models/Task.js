@@ -4,9 +4,9 @@ const UserSchema = new mongoose.Schema({
   title: String,
   description: String,
   user: String,
-  prioroty: String,
+  priority: String,
   status: String,
 });
 
-const UserModel = mongoose.model("Task", UserSchema);
-module.exports = UserModel;
+const TaskModel = mongoose.model("tasks", UserSchema);
+module.exports = TaskModel;
