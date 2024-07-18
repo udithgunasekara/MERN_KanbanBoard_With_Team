@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function TaskCard({
   id,
@@ -12,6 +13,7 @@ export default function TaskCard({
   handleUpdate,
 }) {
   const priVal = priority;
+  const navigate = useNavigate();
 
   const priorityColor = (priority) => {
     switch (priVal) {
@@ -28,6 +30,12 @@ export default function TaskCard({
 
   const priColor = priorityColor(priority);
 
+  //Updating function
+  const updateFunction = () => {
+    console.log("update function working !!");
+    navigate(`/addTask/${id}`);
+  };
+
   return (
     <div className="max-w-sm bg-white rounded-3xl shadow-md overflow-hidden sm:max-w-sm mb-3">
       <div className="p-1 px-4">
@@ -37,9 +45,10 @@ export default function TaskCard({
             {/* TODO adding priority */}
             {priority}
           </span>
+          {/* TODO create update function */}
           <i
-            class="fa-solid fa-pen col-end-7 mt-1"
-            onClick={() => handleUpdate(id)}></i>
+            className="fa-solid fa-pen col-end-7 mt-1"
+            onClick={updateFunction}></i>
         </div>
         <div className="mt-2">
           <h3 className="text-xl font-semibold text-gray-900">{title}</h3>

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function TaskAdd() {
+  const { id } = useParams("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [user, setUser] = useState("");
   const [priority, setPriority] = useState("P1");
   const [status, setStatus] = useState("todo");
+  const navigate = useNavigate();
 
   const Submit = (e) => {
     e.preventDefault();
@@ -18,9 +21,25 @@ export default function TaskAdd() {
         priority,
         status,
       })
-      .then((result) => console.log(result))
+      .then((result) => console.log(result), navigate("/dashboard"))
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`http://localhost:3001/getById/${id}`)
+        .then((response) => {
+          const task = response.data;
+          setTitle(task.title);
+          setDescription(task.description);
+          setUser(task.user);
+          setPriority(task.priority);
+          setStatus(task.status);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [id]);
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100 ">
@@ -31,6 +50,7 @@ export default function TaskAdd() {
               Title:
             </label>
             <input
+              value={title}
               type="text"
               id="title"
               name="title"
@@ -38,6 +58,7 @@ export default function TaskAdd() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+          {console.log("Here the ID is" + id)}
 
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -47,6 +68,7 @@ export default function TaskAdd() {
               id="description"
               name="description"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              value={description}
               onChange={(e) => setDescription(e.target.value)}></textarea>
           </div>
 
@@ -56,6 +78,7 @@ export default function TaskAdd() {
                 User:
               </label>
               <input
+                value={user}
                 type="text"
                 id="user"
                 name="user"
@@ -68,6 +91,7 @@ export default function TaskAdd() {
                 Priority:
               </label>
               <select
+                value={priority}
                 id="priority"
                 name="priority"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -84,6 +108,7 @@ export default function TaskAdd() {
                 Status:
               </label>
               <select
+                value={status}
                 id="status"
                 name="status"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

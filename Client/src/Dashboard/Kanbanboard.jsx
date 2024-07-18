@@ -27,11 +27,6 @@ export default function Kanbanboard() {
       .catch((err) => console.log(err));
   }, []);
 
-  function handleUpdate() {
-    console.log("handleUpdate function is working ");
-    history("/addTask");
-  }
-
   return (
     <div className="snap-mandatory snap-x ml-10 mt-20 flex flex-grow h-full overflow-x-auto hide-scrollbar rounded-3xl">
       <div className="flex pl-6 w-max">
@@ -54,7 +49,6 @@ export default function Kanbanboard() {
                 priority={task.priority}
                 statuss={task.statsdfuss}
                 onDelete={deleteTask}
-                handleUpdate={handleUpdate}
               />
             ))}
         </div>

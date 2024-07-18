@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<CreateUsers />}></Route>
           <Route path="pass" element={<Testpass />}></Route>
 
-          <Route path="addTask" element={<TaskAdd />}></Route>
+          <Route path="addTask/:id" element={<TaskAdd />}></Route>
           <Route path="dashboard" element={<Dashboard />}></Route>
 
           {/* for testing purpose */}
