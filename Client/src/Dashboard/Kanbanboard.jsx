@@ -2,11 +2,23 @@
 import React, { useEffect, useState } from "react";
 import TaskCard from "./TaskCard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // Make sure to adjust the import path as needed
 
 export default function Kanbanboard() {
   const [tasks, setTasks] = useState([]);
-  let key1 = "";
+  const history = useNavigate();
+
+  const deleteTask = (id) => {
+    axios
+      .delete("http://localhost:3001/deleteTask/" + id)
+      .then((result) => {
+        console.log(result.data);
+        // Filter out the deleted task from the state
+        setTasks(tasks.filter((task) => task._id !== id));
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     axios
@@ -15,8 +27,13 @@ export default function Kanbanboard() {
       .catch((err) => console.log(err));
   }, []);
 
+  function handleUpdate() {
+    console.log("handleUpdate function is working ");
+    history("/addTask");
+  }
+
   return (
-    <div className="snap-mandatory snap-x ml-10 flex flex-grow h-full overflow-x-auto hide-scrollbar rounded-3xl">
+    <div className="snap-mandatory snap-x ml-10 mt-20 flex flex-grow h-full overflow-x-auto hide-scrollbar rounded-3xl">
       <div className="flex pl-6 w-max">
         <div className="bg-gray-100 p-2 rounded-md shadow-md overflow-x-auto">
           <div className="flex justify-between items-center mb-2">
@@ -28,23 +45,18 @@ export default function Kanbanboard() {
           {tasks
             .filter((task) => task.status === "todo")
 
-            .map(
-              (task) => (
-                console.log("New task getter: " + task._id),
-                (key1 = task._id),
-                console.log("New task getter key: " + key1),
-                (
-                  <TaskCard
-                    key={key1}
-                    title={task.title}
-                    description={task.description}
-                    user={task.user}
-                    priority={task.priority}
-                    statuss={task.statsdfuss}
-                  />
-                )
-              )
-            )}
+            .map((task) => (
+              <TaskCard
+                id={task._id}
+                title={task.title}
+                description={task.description}
+                user={task.user}
+                priority={task.priority}
+                statuss={task.statsdfuss}
+                onDelete={deleteTask}
+                handleUpdate={handleUpdate}
+              />
+            ))}
         </div>
         <div className="bg-gray-100 p-2 rounded-md shadow-md overflow-x-auto">
           <div className="flex justify-between items-center mb-2">
@@ -57,12 +69,13 @@ export default function Kanbanboard() {
             .filter((task) => task.status === "inProgress")
             .map((task) => (
               <TaskCard
-                key={task._id}
+                id={task._id}
                 title={task.title}
                 description={task.description}
                 user={task.user}
                 priority={task.priority}
                 status={task.status}
+                onDelete={deleteTask}
               />
             ))}
         </div>
@@ -78,12 +91,13 @@ export default function Kanbanboard() {
             .filter((task) => task.status === "done")
             .map((task) => (
               <TaskCard
-                key={task._id}
+                id={task._id}
                 title={task.title}
                 description={task.description}
                 user={task.user}
                 priority={task.priority}
                 status={task.status}
+                onDelete={deleteTask}
               />
             ))}
         </div>
@@ -99,12 +113,13 @@ export default function Kanbanboard() {
             .filter((task) => task.status === "backlog")
             .map((task) => (
               <TaskCard
-                key={task._id}
+                id={task._id}
                 title={task.title}
                 description={task.description}
                 user={task.user}
                 priority={task.priority}
                 status={task.status}
+                onDelete={deleteTask}
               />
             ))}
         </div>

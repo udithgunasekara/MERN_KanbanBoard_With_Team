@@ -1,16 +1,17 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 export default function TaskCard({
-  key,
+  id,
   title,
   description,
   user,
   priority,
   status,
+  onDelete,
+  handleUpdate,
 }) {
   const priVal = priority;
-
-  function taskDelete(key) {}
 
   const priorityColor = (priority) => {
     switch (priVal) {
@@ -30,14 +31,15 @@ export default function TaskCard({
   return (
     <div className="max-w-sm bg-white rounded-3xl shadow-md overflow-hidden sm:max-w-sm mb-3">
       <div className="p-1 px-4">
-        <div className="pt-3">
+        <div className="pt-3 grid grid-cols-5">
           <span
             className={`px-2 py-1 text-xs font-semibold text-white rounded-full ${priColor}`}>
             {/* TODO adding priority */}
             {priority}
-            {console.log("Kdey: " + key)}
-            {console.log("status:" + status)}
           </span>
+          <i
+            class="fa-solid fa-pen col-end-7 mt-1"
+            onClick={() => handleUpdate(id)}></i>
         </div>
         <div className="mt-2">
           <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
@@ -62,7 +64,6 @@ export default function TaskCard({
                 />
               </div>
             </div>
-
             <div className="text-sm text-gray-500 col-start-4 col-span-3">
               8 comments
             </div>
@@ -85,7 +86,7 @@ export default function TaskCard({
             </p>
             <i
               className="fa-solid fa-trash col-end-7 pt-2 text-red-700"
-              onClick={(e) => taskDelete()}></i>
+              onClick={() => onDelete(id)}></i>
           </div>
         </div>
       </div>

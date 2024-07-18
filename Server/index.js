@@ -27,6 +27,13 @@ app.get("/getAll", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+app.delete("/deleteTask/:id", (req, res) => {
+  const id = req.params.id;
+  TaskModel.findByIdAndDelete({ _id: id })
+    .then((task) => res.json(task))
+    .catch((err) => res.json(err));
+});
+
 app.listen(3001, () => {
   console.log("Server is Running");
 });
