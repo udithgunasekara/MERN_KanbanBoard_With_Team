@@ -12,34 +12,53 @@ export default function TaskAdd() {
   const navigate = useNavigate();
 
   const Submit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:3001/createTask", {
-        title,
-        description,
-        user,
-        priority,
-        status,
-      })
-      .then((result) => console.log(result), navigate("/dashboard"))
-      .catch((err) => console.log(err));
+    if (id === "null") {
+      console.log("here creating" + priority, status, user);
+      e.preventDefault();
+      axios
+        .post("http://localhost:3001/createTask", {
+          title,
+          description,
+          user,
+          priority,
+          status,
+        })
+        .then((result) => console.log(result), navigate("/dashboard"))
+        .catch((err) => console.log(err));
+    } else {
+      e.preventDefault();
+      console.log("here dta on update" + priority, status, user);
+      console.log("Here updating");
+      axios
+        .put("http://localhost:3001/updateTask/" + id, {
+          title,
+          description,
+          user,
+          priority,
+          status,
+        })
+        .then((result) => console.log(result), navigate("/dashboard"))
+        .catch((err) => console.log(err));
+    }
   };
 
-  useEffect(() => {
-    if (id) {
-      axios
-        .get(`http://localhost:3001/getById/${id}`)
-        .then((response) => {
-          const task = response.data;
-          setTitle(task.title);
-          setDescription(task.description);
-          setUser(task.user);
-          setPriority(task.priority);
-          setStatus(task.status);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [id]);
+  if (id !== "null") {
+    useEffect(() => {
+      if (id) {
+        axios
+          .get(`http://localhost:3001/getById/${id}`)
+          .then((response) => {
+            const task = response.data;
+            setTitle(task.title);
+            setDescription(task.description);
+            setUser(task.user);
+            setPriority(task.priority);
+            setStatus(task.status);
+          })
+          .catch((error) => console.log(error));
+      }
+    }, [id]);
+  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100 ">
@@ -58,7 +77,6 @@ export default function TaskAdd() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          {console.log("Here the ID is" + id)}
 
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -102,6 +120,7 @@ export default function TaskAdd() {
                 <option value="P4">Priority 4</option>
               </select>
             </div>
+            {console.log("you are setting: " + priority)}
 
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700">

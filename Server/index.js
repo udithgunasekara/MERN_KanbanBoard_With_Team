@@ -41,6 +41,22 @@ app.get("/getById/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+app.put("/updateTask/:id", (req, res) => {
+  const id = req.params.id;
+  TaskModel.findByIdAndUpdate(
+    { _id: id },
+    {
+      title: req.body.title,
+      description: req.body.description,
+      user: req.body.user,
+      priority: req.body.priority,
+      status: req.body.status,
+    }
+  )
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 app.listen(3001, () => {
   console.log("Server is Running");
 });

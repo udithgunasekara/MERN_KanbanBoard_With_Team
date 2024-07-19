@@ -27,6 +27,10 @@ export default function Kanbanboard() {
       .catch((err) => console.log(err));
   }, []);
 
+  function moveOn() {
+    history("/addTask/" + null);
+  }
+
   return (
     <div className="snap-mandatory snap-x ml-10 mt-20 flex flex-grow h-full overflow-x-auto hide-scrollbar rounded-3xl">
       <div className="flex pl-6 w-max">
@@ -34,7 +38,7 @@ export default function Kanbanboard() {
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-xl font-bold">ToDo</h3>
             <div className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300">
-              <i className="fa-solid fa-plus text-xl"></i>
+              <i className="fa-solid fa-plus text-xl" onClick={moveOn}></i>
             </div>
           </div>
           {tasks
