@@ -21,3 +21,23 @@
     scrollbar-width: none;  /* Firefox */
   }
   
+/* 
+  updating scroll bar */
+  /* customScrollbar.css */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #295bac;
+}

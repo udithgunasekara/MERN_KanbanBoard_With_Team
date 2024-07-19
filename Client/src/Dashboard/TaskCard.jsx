@@ -36,18 +36,18 @@ export default function TaskCard({
     navigate(`/addTask/${id}`);
   };
 
+  //Dnd functions
+
   return (
     <div className="max-w-sm bg-white rounded-3xl shadow-md overflow-hidden sm:max-w-sm mb-3">
       <div className="p-1 px-4">
         <div className="pt-3 grid grid-cols-5">
           <span
             className={`px-2 py-1 text-xs font-semibold text-white rounded-full ${priColor}`}>
-            {/* TODO adding priority */}
             {priority}
           </span>
-          {/* TODO create update function */}
           <i
-            className="fa-solid fa-pen col-end-7 mt-1"
+            className="fa-solid fa-pen col-end-7 mt-1 cursor-pointer"
             onClick={updateFunction}></i>
         </div>
         <div className="mt-2">
@@ -76,25 +76,16 @@ export default function TaskCard({
             <div className="text-sm text-gray-500 col-start-4 col-span-3">
               8 comments
             </div>
-
             <div className="col-end-11 col-span-1">
-              <div className="flex -space-x-1 overflow-hidden">
-                {/* <img
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                  src="https://via.placeholder.com/24"
-                  alt=""
-                /> */}
-                {user}
-              </div>
+              <div className="flex -space-x-1 overflow-hidden">{user}</div>
             </div>
           </span>
-
           <div className="grid grid-cols-5 pt-3">
             <p className="mt-2 text-sm text-gray-500 col-span-2">
               9th June, 2022
             </p>
             <i
-              className="fa-solid fa-trash col-end-7 pt-2 text-red-700"
+              className="fa-solid fa-trash col-end-7 pt-2 text-red-700 cursor-pointer"
               onClick={() => onDelete(id)}></i>
           </div>
         </div>

@@ -1,8 +1,8 @@
 // Dashboard.js
 import React from "react";
-import Header from "./Header"; // Adjust the import path as needed
-import Kanbanboard from "./Kanbanboard"; // Adjust the import path as needed
-import Sidebar from "./SideBar"; // Ensure the import path is correct
+import Header from "./Header";
+import Kanbanboard from "./Kanbanboard";
+import Sidebar from "./SideBar";
 
 export default function Dashboard() {
   return (
