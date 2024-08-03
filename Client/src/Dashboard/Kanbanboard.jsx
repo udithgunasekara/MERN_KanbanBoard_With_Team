@@ -9,6 +9,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+
 import {
   arrayMove,
   SortableContext,
@@ -16,7 +17,9 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+
 import { CSS } from "@dnd-kit/utilities";
+
 import TaskCard from "./TaskCard";
 
 export default function Kanbanboard() {
@@ -122,7 +125,7 @@ function SortableItem({ id, task, onDelete }) {
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: transition || "transform 150ms ease",
   };
 
   return (

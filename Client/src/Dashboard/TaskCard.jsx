@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function TaskCard({
@@ -10,13 +9,12 @@ export default function TaskCard({
   priority,
   status,
   onDelete,
-  handleUpdate,
 }) {
-  const priVal = priority;
   const navigate = useNavigate();
 
+  // Function to determine the priority color
   const priorityColor = (priority) => {
-    switch (priVal) {
+    switch (priority) {
       case "P1":
         return "bg-red-500";
       case "P2":
@@ -25,18 +23,17 @@ export default function TaskCard({
         return "bg-yellow-500";
       case "P4":
         return "bg-gray-500";
+      default:
+        return "bg-gray-300";
     }
   };
 
   const priColor = priorityColor(priority);
 
-  //Updating function
+  // Function to navigate to the update task page
   const updateFunction = () => {
-    console.log("update function working !!");
     navigate(`/addTask/${id}`);
   };
-
-  //Dnd functions
 
   return (
     <div className="max-w-sm bg-white rounded-3xl shadow-md overflow-hidden sm:max-w-sm mb-3">

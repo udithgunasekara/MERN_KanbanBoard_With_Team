@@ -18,11 +18,11 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<CreateUsers />}></Route>
+          <Route path="/dump" element={<CreateUsers />}></Route>
           <Route path="pass" element={<Testpass />}></Route>
 
           <Route path="addTask/:id" element={<TaskAdd />}></Route>
-          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="/" element={<Dashboard />}></Route>
 
           {/* for testing purpose */}
           <Route path="kanban" element={<Kanbanboard />}></Route>
